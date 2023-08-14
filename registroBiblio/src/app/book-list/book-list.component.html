@@ -1,9 +1,9 @@
-<div *ngFor="let book of books">
-  <h2>{{ book.name }}</h2>
-  <p>Author: {{ book.author }}</p>
-  <p>Editorial: {{ book.editorial }}</p>
-  <p>Gender: {{ book.gender }}</p>
-  <hr>
-</div>
-
+ <ul>
+    <li *ngFor="let book of books">
+        {{book.name}} - {{book.author}}
+        <button (click)="editBook(book)">Edit</button>
+        <button (click)="deleteBook(book.id)">Delete</button>
+    </li>
+</ul>
+<app-book-form></app-book-form>
 

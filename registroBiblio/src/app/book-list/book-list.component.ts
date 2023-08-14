@@ -1,28 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { BookService } from '../books.service';
+import { Component } from '@angular/core';
 import { Book } from '../models/book.model';
+import { BookService } from '../books.service';
+
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.scss']
+  styleUrls: ['./book-list.component.scss'],
 })
-export class BookListComponent implements OnInit {
+export class BookListComponent {
   books: Book[] = [];
 
   constructor(private bookService: BookService) {}
 
-  ngOnInit() {
-    this.bookService.getBooks().subscribe(
-      (books: Book[]) => {
-        this.books = books;
-      },
-      (error: any) => {
-        console.error('Error getting books:', error);
-      }
-    );
+  ngOnInit(): void {
+    this.getBooks();
+  }
+
+  getBooks(): void {
+    this.bookService.getBooks().subscribe((books) => {
+      this.books = books;
+    });
+  }
+
+  deleteBook(id: number): void {
+    this.bookService.getBooks().subscribe((books) => {
+      this.getBooks();
+    });
+  }
+
+  editBook(book: Book): void {
+    console.log('Editing Book:', book);
   }
 }
-
-
-
-
